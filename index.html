@@ -38,6 +38,89 @@
       flex-direction: column;
     }
 
+    /* Age Verification Gate Overlay */
+    .age-gate {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(11, 14, 20, 0.96);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .age-gate-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(79, 195, 247, 0.25);
+    }
+
+    .age-gate-card h2 {
+      font-family: 'Sacramento', cursive;
+      font-size: 3.5rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 10px rgba(129, 212, 250, 0.4);
+      line-height: 1;
+    }
+
+    .age-gate-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .age-gate-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .btn-age-confirm {
+      background: linear-gradient(45deg, #29b6f6, #0288d1);
+      color: #ffffff;
+      border: none;
+      padding: 0.85rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(41, 182, 246, 0.3);
+    }
+
+    .btn-age-confirm:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(41, 182, 246, 0.5);
+    }
+
+    .btn-age-deny {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.75rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-age-deny:hover {
+      border-color: rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+    }
+
     /* Header / Hero Section */
     header {
       text-align: center;
@@ -245,6 +328,18 @@
 </head>
 <body>
 
+  <!-- 18+ Age Verification Modal -->
+  <div class="age-gate" id="ageGate">
+    <div class="age-gate-card">
+      <h2>Age Verification</h2>
+      <p>This website contains adult content intended for mature audiences. You must be 18 years or older to enter.</p>
+      <div class="age-gate-buttons">
+        <button class="btn-age-confirm" id="ageConfirmBtn">I am 18 or older</button>
+        <button class="btn-age-deny" id="ageDenyBtn">Under 18 — Exit</button>
+      </div>
+    </div>
+  </div>
+
   <header>
     <img src="profile.jpeg" alt="Brooklyn Cowgirl Profile" class="profile-avatar">
     <p class="subtitle">Official Portfolio</p>
@@ -296,6 +391,26 @@
   </footer>
 
   <script>
+    /* --- Age Verification Logic --- */
+    const ageGate = document.getElementById('ageGate');
+    const ageConfirmBtn = document.getElementById('ageConfirmBtn');
+    const ageDenyBtn = document.getElementById('ageDenyBtn');
+
+    // Check if user already confirmed age
+    if (localStorage.getItem('ageVerified') === 'true') {
+      ageGate.style.display = 'none';
+    }
+
+    ageConfirmBtn.addEventListener('click', () => {
+      localStorage.setItem('ageVerified', 'true');
+      ageGate.style.display = 'none';
+    });
+
+    ageDenyBtn.addEventListener('click', () => {
+      window.location.href = 'https://www.google.com';
+    });
+
+    /* --- Lightbox Logic --- */
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
     const lightboxClose = document.getElementById('lightboxClose');
