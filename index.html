@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brooklyn Cowgirl | Official Gallery</title>
   
-  <!-- Google Fonts: Sacramento (Cute Cursive) & Plus Jakarta Sans (Clean Body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
@@ -41,8 +40,28 @@
     /* Header / Hero Section */
     header {
       text-align: center;
-      padding: 4rem 1.5rem 2rem;
+      padding: 3.5rem 1.5rem 2rem;
       background: radial-gradient(circle at top, rgba(79, 195, 247, 0.12), transparent 70%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Profile Avatar Styling */
+    .profile-avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent-blue);
+      box-shadow: 0 0 20px rgba(79, 195, 247, 0.4);
+      margin-bottom: 1.25rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .profile-avatar:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 30px rgba(79, 195, 247, 0.6);
     }
 
     .subtitle {
@@ -226,6 +245,7 @@
 <body>
 
   <header>
+    <img src="profile.jpg" alt="Brooklyn Cowgirl Profile" class="profile-avatar">
     <p class="subtitle">Official Portfolio</p>
     <h1>Brooklyn Cowgirl</h1>
     <p class="tagline">AI Model & Digital Creator</p>
@@ -264,7 +284,6 @@
     </div>
   </main>
 
-  <!-- Lightbox Container -->
   <div class="lightbox" id="lightbox">
     <span class="lightbox-close" id="lightboxClose">&times;</span>
     <img class="lightbox-img" id="lightboxImg" src="" alt="Expanded View">
